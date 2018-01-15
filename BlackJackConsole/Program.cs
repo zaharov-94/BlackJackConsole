@@ -9,6 +9,7 @@ namespace BlackJackConsole
         {
             Hello();
             Play();
+
             Console.ReadLine();
         }
 
