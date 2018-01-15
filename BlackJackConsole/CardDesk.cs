@@ -34,66 +34,11 @@ namespace BlackJackConsole
         {
             foreach(Suite s in Enum.GetValues(typeof(Suite)))
             {
-                foreach(string w in Enum.GetNames(typeof(Worth)))
+                foreach(Worth w in Enum.GetValues(typeof(Worth)))
                 {
                     desk.Add(new Card { Suite = s, Worth = w});
                 }
             }
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.two });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.three });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.four });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.five });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.six });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.seven });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.eight });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.nine });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.ten });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.Jack });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.Queen });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.King });
-            //desk.Add(new Card { Suite = Suite.clubs, Worth = Worth.Ace });
-
-            //desk.Add(new Card { Suite = Suite.diamonds, Worth = Worth.two });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.three });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.four });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.five });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.six });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.seven });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.eight });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.nine });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.ten });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.Jack });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.Queen });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.King });
-            //desk.Add(new Card {Suite = Suite.diamonds, Worth = Worth.Ace });
-
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.two });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.three });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.four });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.five });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.six });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.seven });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.eight });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.nine });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.ten });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.Jack });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.Queen });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.King });
-            //desk.Add(new Card { Suite = Suite.hearts, Worth = Worth.Ace });
-
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.two });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.three });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.four });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.five });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.six });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.seven });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.eight });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.nine });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.ten });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.Jack });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.Queen });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.King });
-            //desk.Add(new Card { Suite = Suite.spades, Worth = Worth.Ace });
         }
 
         public Card GetCard()
