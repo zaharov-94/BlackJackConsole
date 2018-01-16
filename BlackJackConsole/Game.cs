@@ -1,98 +1,59 @@
-﻿using System;
+﻿using BlackJackConsole.Enums;
+using System;
 
 namespace BlackJackConsole
 {
     internal class Game
     {
-        CardDesk cd;
-        Dealer dl;
-        Player pl;
-        int playerWins;
-        int dealerWins;
+        private Dealer _dl;
 
         public Game()
         {
-            cd = new CardDesk();
-            dl = new Dealer(cd.GetCard());
-            pl = new Player(cd.GetCard());
-            playerWins = 0;
-            dealerWins = 0;
+            _dl = new Dealer();
         }
 
-        public int AddCardPlayer()
-        {
-            pl.TakeCard(cd.GetCard());
-            if (pl.CardSum == 21) { playerWins++; Console.WriteLine("Player Win!\n"); ShowCards(); return 1; }
-            if (pl.CardSum > 21) { dealerWins++; Console.WriteLine("Player Lose!\n"); ShowCards(); return -1; }
-            return 0;
-        }
-        public int AddCardDealer()
-        {
-            while (dl.CardSum < 17)
-            {
-                dl.TakeCard(cd.GetCard());
-            }
-            if (dl.CardSum == 21) { dealerWins++; Console.WriteLine("Player Lose!\n"); ShowCards(); return -1; }
-            if (dl.CardSum > 21) { playerWins++; Console.WriteLine("Player Win!\n"); ShowCards();  return 1; }
-            return 0;
-        }
-
-        public void ShowCards()
-        {
-            dl.ShowCards();
-            pl.ShowCards();
-        }
         public void ShowScore()
         {
-            Console.WriteLine("Score:");
-            Console.WriteLine("Player Wins: {0} \nDealer Wins: {1}", playerWins, dealerWins);
+            Console.WriteLine("\nScore:");
+            Console.WriteLine("Player Wins: {0} \nComputer Wins: {1}", _dl.PlayerWins, _dl.ComputerWins);
         }
-
-        public void CalculateResult()
-        {
-            if (pl.CardSum > dl.CardSum) { Console.WriteLine("Player Win!\n"); playerWins++; }
-            else if (pl.CardSum < dl.CardSum) { Console.WriteLine("Player Lose!\n"); dealerWins++; }
-            else { Console.WriteLine("Draw\n"); }
-
-        }
-
+ 
         public void ResetGame()
         {
-            cd = new CardDesk();
-            dl = new Dealer(cd.GetCard());
-            pl = new Player(cd.GetCard());
+            _dl.StartDelivery();
         }
 
-        public void SubmitCards()
+        public void DistributeCards()
         {
             ConsoleKeyInfo cki;
             while (true)
             {
-                Console.WriteLine("Click 'T' to take a card, or 'P' to pass");
+                Console.Clear();
+                _dl.ShowCards(false);
+                Console.WriteLine("\nClick 'T' to take a card, or 'P' to pass");
                 cki = Console.ReadKey();
                 Console.Clear();
 
                 if (cki.Key.ToString() == "T")
                 {
-                    if (AddCardPlayer() == 0)
+                    if (_dl.AddCard(Names.Player) == 0)
                     {
-                        ShowCards();
+                        _dl.ShowCards(false);
                     }
                     else break;
                 }
                 if (cki.Key.ToString() == "P")
                 {
-                    if (AddCardDealer() == 0)
+                    if (_dl.AddCard(Names.Computer) == 0)
                     {
-                        CalculateResult();
-                        ShowCards();
+                        _dl.CalculateResult();
+                        _dl.ShowCards(true);
                     }
                     break;
                 }
-
                 if ((cki.Key.ToString() != "P") && (cki.Key.ToString() != "T"))
                 {
-                    ShowCards();
+                    _dl.ShowCards(false);
                 }
             }
         }

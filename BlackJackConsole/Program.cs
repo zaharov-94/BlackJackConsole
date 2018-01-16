@@ -30,9 +30,7 @@ namespace BlackJackConsole
             Console.Clear();
             while (cki.Key.ToString() == "Y")
             {
-                gm.AddCardPlayer();
-                gm.ShowCards();
-                gm.SubmitCards();
+                gm.DistributeCards();
                 gm.ShowScore();
                 Console.WriteLine("Do you want start play? (Y/N)");
                 cki = Console.ReadKey();

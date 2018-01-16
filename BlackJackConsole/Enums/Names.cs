@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlackJackConsole
+namespace BlackJackConsole.Enums
 {
-    class Weight
+    public enum Names
     {
+        Player = 0,
+        Computer = 1
     }
 }

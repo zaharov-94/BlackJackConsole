@@ -1,29 +1,44 @@
-﻿using System;
+﻿using BlackJackConsole.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace BlackJackConsole
 {
     internal class Player
     {
-        List<Card> _cd;
-        int _cardSum;
+        private List<Card> _cd;
+        private Names _name;
+        private Dictionary<Worth, int> _weight;
+        private int _cardSum;
+        
 
+        public Names Name
+        {
+            get
+            {
+                return _name;
+            }
+        }           
         public int CardSum
         {
+
             get
             {
                 _cardSum = 0;
                 foreach (Card c in _cd)
                 {
-                    _cardSum += (int)c.Worth;
+                    _cardSum += _weight[c.Worth];
                 }
                 return _cardSum;
             }
         }
 
-        public Player(Card card)
+        public Player(Names name, Card card)
         {
+            _name = name;          
             _cd = new List<Card>();
+            _weight = new Dictionary<Worth, int>(52);
+            FillWeight();
             _cd.Add(card);
         }
 
@@ -34,14 +49,25 @@ namespace BlackJackConsole
 
         public void ShowCards()
         {
-            _cardSum = 0;
-            Console.WriteLine("Player cards:");
+            Console.WriteLine("\n"+_name+" cards:");
             foreach (Card c in _cd)
             {
                 Console.WriteLine(c.Suite + " " + c.Worth);
-                _cardSum += (int)c.Worth;
             }
-            Console.WriteLine("Player cards sum: {0}\n", _cardSum);
+            Console.WriteLine("Cards sum:"+CardSum);
+        }
+
+        private void FillWeight()
+        {
+            for (Worth w = Worth.two; w <= Worth.Ace; w++)
+            {
+                _weight.Add(w, (int)w + 2);
+            }
+            for (Worth w = Worth.Jack; w <= Worth.King; w++)
+            {
+                _weight.Add(w, 10);
+            }
+
         }
     }
 }
