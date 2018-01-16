@@ -5,12 +5,12 @@ namespace BlackJackConsole
 {
     internal class Game
     {
-        private Dealer _dl;
+        private Dealer _dealer;
         private Display _display;
 
         public Game()
         {
-            _dl = new Dealer();
+            _dealer = new Dealer();
             _display = new Display();
         }
 
@@ -20,31 +20,31 @@ namespace BlackJackConsole
             while (_display.PlayDialog(true) == Variables.Yes)
             {
                 DistributeCards();
-                _display.ShowScore(_dl.PlayerWins, _dl.ComputerWins);
+                _display.ShowScore(_dealer.PlayerWins, _dealer.ComputerWins);
                 ResetGame();
             }
-            _display.ShowScore(_dl.PlayerWins, _dl.ComputerWins);
+            _display.ShowScore(_dealer.PlayerWins, _dealer.ComputerWins);
             _display.DeleyScreen();
         }
 
         private void ResetGame()
         {
-            _dl.StartDelivery();
+            _dealer.StartDelivery();
         }
 
         private void ShowCards(bool finished)
         {
             if(finished)
             {
-                _display.ShowCards(Names.Player, _dl.GetPlayer(Names.Player).Cards);
-                _display.ShowSum(_dl.GetPlayer(Names.Player).CardSum);
-                _display.ShowCards(Names.Computer, _dl.GetPlayer(Names.Computer).Cards);
-                _display.ShowSum(_dl.GetPlayer(Names.Computer).CardSum);
+                _display.ShowCards(Names.Player, _dealer.GetPlayer(Names.Player).Cards);
+                _display.ShowSum(_dealer.GetPlayer(Names.Player).CardSum);
+                _display.ShowCards(Names.Computer, _dealer.GetPlayer(Names.Computer).Cards);
+                _display.ShowSum(_dealer.GetPlayer(Names.Computer).CardSum);
             }
             if (!finished)
             {
-                _display.ShowCards(Names.Player, _dl.GetPlayer(Names.Player).Cards);
-                _display.ShowSum(_dl.GetPlayer(Names.Player).CardSum);
+                _display.ShowCards(Names.Player, _dealer.GetPlayer(Names.Player).Cards);
+                _display.ShowSum(_dealer.GetPlayer(Names.Player).CardSum);
             }
 
         }
@@ -59,13 +59,13 @@ namespace BlackJackConsole
                 d = _display.PlayDialog(false);
                 if (d == Variables.Take)
                 {
-                    _dl.AddCard(Names.Player);
+                    _dealer.AddCard(Names.Player);
                     ShowCards(false);
                 }
                 if (d == Variables.Pass)
                 {
-                    _dl.AddCard(Names.Computer);
-                    result = _dl.CalculateResult();
+                    _dealer.AddCard(Names.Computer);
+                    result = _dealer.CalculateResult();
                     _display.ShowResult(result);
                     ShowCards(true);
                     break;

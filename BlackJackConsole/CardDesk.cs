@@ -7,13 +7,13 @@ namespace BlackJackConsole
     internal class CardDesk
     {
         private List<Card> _desk;
-        private Random _rng;
+        private Random _rand;
         private bool[] _used;
 
         public CardDesk()
         {
             _desk = new List<Card>(Variables.DeskSize);
-            _rng = new Random();
+            _rand = new Random();
             _used = new bool[Variables.DeskSize];
 
             for (int i=0; i< Variables.DeskSize; i++)
@@ -32,7 +32,7 @@ namespace BlackJackConsole
 
         private int RandomCardValue()
         {
-            int n = _rng.Next(Variables.DeskSize);
+            int n = _rand.Next(Variables.DeskSize);
             while (true)
             {
                 if (!_used[n])
@@ -40,7 +40,10 @@ namespace BlackJackConsole
                     _used[n] = true;
                     return n;
                 }
-                else n = _rng.Next(Variables.DeskSize);
+                if (_used[n])
+                {
+                    n = _rand.Next(Variables.DeskSize);
+                }
             }
         }
 

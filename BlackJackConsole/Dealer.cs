@@ -6,7 +6,7 @@ namespace BlackJackConsole
     {
         private Player _player;
         private Player _computer;
-        private CardDesk _cd;
+        private CardDesk _cardDesk;
         private int _playerWins;
         private int _computerWins;
         private Display _display = new Display();
@@ -37,13 +37,13 @@ namespace BlackJackConsole
         {
             if (name == Names.Player)
             {
-                _player.TakeCard(_cd.GetCard());
+                _player.TakeCard(_cardDesk.GetCard());
             }
             if (name == Names.Computer)
             {
                 while (_computer.CardSum < 17)
                 {
-                    _computer.TakeCard(_cd.GetCard());
+                    _computer.TakeCard(_cardDesk.GetCard());
                 }
                 
             }
@@ -87,9 +87,9 @@ namespace BlackJackConsole
 
         public void StartDelivery()
         {
-            _cd = new CardDesk();
-            _player = new Player(Names.Player, _cd.GetCard());
-            _computer = new Player(Names.Computer, _cd.GetCard());
+            _cardDesk = new CardDesk();
+            _player = new Player(Names.Player, _cardDesk.GetCard());
+            _computer = new Player(Names.Computer, _cardDesk.GetCard());
         }
 
         public Player GetPlayer(Names name)

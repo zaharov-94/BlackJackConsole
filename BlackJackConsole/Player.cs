@@ -6,7 +6,7 @@ namespace BlackJackConsole
 {
     internal class Player
     {
-        private List<Card> _cd;
+        private List<Card> _cards;
         private Names _name;
         private Dictionary<Worth, int> _weight;
         private int _cardSum;
@@ -24,7 +24,7 @@ namespace BlackJackConsole
             get
             {
                 _cardSum = 0;
-                foreach (Card c in _cd)
+                foreach (Card c in _cards)
                 {
                     _cardSum += _weight[c.Worth];
                 }
@@ -35,22 +35,22 @@ namespace BlackJackConsole
         {
             get
             {
-                return _cd;
+                return _cards;
             }
         }
 
         public Player(Names name, Card card)
         {
             _name = name;          
-            _cd = new List<Card>();
+            _cards = new List<Card>();
             _weight = new Dictionary<Worth, int>(Variables.WinCombinatin);
             FillWeight();
-            _cd.Add(card);
+            _cards.Add(card);
         }
 
         public void TakeCard(Card card)
         {
-            _cd.Add(card);
+            _cards.Add(card);
         }
 
         private void FillWeight()
