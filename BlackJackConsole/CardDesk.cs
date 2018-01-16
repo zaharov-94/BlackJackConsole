@@ -6,47 +6,68 @@ namespace BlackJackConsole
 {
     public class CardDesk
     {
-        List<Card> desk;
-        Random rng;
-        bool[] used;
-
+        private List<Card> _desk;
+        private Random _rng;
+        private bool[] _used;
+        private Dictionary<Worth, int> _weight;
+        
         public CardDesk()
         {
-            desk = new List<Card>(52);
-            rng = new Random();
-            used = new bool[52];
-            for(int i=0; i<52; i++)
-            { used[i] = false; }
+            _desk = new List<Card>(52);
+            _rng = new Random();
+            _used = new bool[52];
+            _weight = new Dictionary<Worth, int>(52);
+            for (int i=0; i<52; i++)
+            { _used[i] = false; }
             CreateDesk();
-        }
-
-        int RandomCardValue()
-        {
-            int n = rng.Next(52);
-            while (true)
-            {
-                if (!used[n]) { used[n] = true; return n; }
-                else n = rng.Next(52);
-            }
-        }
-
-        void CreateDesk()
-        {
-            foreach(Suite s in Enum.GetValues(typeof(Suite)))
-            {
-                foreach(Worth w in Enum.GetValues(typeof(Worth)))
-                {
-                    desk.Add(new Card { Suite = s, Worth = w});
-                }
-            }
+            FillWeight();
         }
 
         public Card GetCard()
         {
             int number = RandomCardValue();
-            foreach (var card in desk)
-                Console.WriteLine(card.Suite+" "+card.Worth);
-            return desk[number];
+            //foreach (var card in _desk)
+            //    Console.WriteLine(card.Suite + " " + card.Worth);
+            return _desk[number];
         }
-    }
+
+        public int GetWeight(Worth w)
+        {
+            return _weight[w];
+        }
+
+        private int RandomCardValue()
+        {
+            int n = _rng.Next(52);
+            while (true)
+            {
+                if (!_used[n]) { _used[n] = true; return n; }
+                else n = _rng.Next(52);
+            }
+        }
+
+        private void CreateDesk()
+        {
+            foreach(Suite s in Enum.GetValues(typeof(Suite)))
+            {
+                foreach(Worth w in Enum.GetValues(typeof(Worth)))
+                {
+                    _desk.Add(new Card { Suite = s, Worth = w});
+                }
+            }
+        }
+
+        private void FillWeight ()
+        {
+            for(Worth w = Worth.two; w<=Worth.Ace; w++)
+            {
+                _weight.Add(w, (int)w+2);
+            }
+            for (Worth w = Worth.Jack; w <= Worth.King; w++)
+            {
+                _weight.Add(w, 10);
+            }
+
+        }
+   }
 }

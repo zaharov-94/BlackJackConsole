@@ -16,10 +16,11 @@ namespace BlackJackConsole.Enums
       seven= 5,
       eight = 6,
       nine = 7,
-      ten = 8,   
-      Jack = 9, 
-      Queen = 10,
-      King = 11, 
-      Ace = 12
+      ten = 8,
+      Ace = 9,
+      Jack = 10, 
+      Queen = 11,
+      King = 12, 
+
     }
 }
