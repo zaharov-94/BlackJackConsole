@@ -10,14 +10,13 @@ namespace BlackJackConsole
         private Random _rng;
         private bool[] _used;
 
-        
         public CardDesk()
         {
-            _desk = new List<Card>(52);
+            _desk = new List<Card>(Variables.DeskSize);
             _rng = new Random();
-            _used = new bool[52];
+            _used = new bool[Variables.DeskSize];
 
-            for (int i=0; i<52; i++)
+            for (int i=0; i< Variables.DeskSize; i++)
             {
                 _used[i] = false;
             }
@@ -33,7 +32,7 @@ namespace BlackJackConsole
 
         private int RandomCardValue()
         {
-            int n = _rng.Next(52);
+            int n = _rng.Next(Variables.DeskSize);
             while (true)
             {
                 if (!_used[n])
@@ -41,7 +40,7 @@ namespace BlackJackConsole
                     _used[n] = true;
                     return n;
                 }
-                else n = _rng.Next(52);
+                else n = _rng.Next(Variables.DeskSize);
             }
         }
 
@@ -55,7 +54,5 @@ namespace BlackJackConsole
                 }
             }
         }
-
-
    }
 }

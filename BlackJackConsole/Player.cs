@@ -10,7 +10,7 @@ namespace BlackJackConsole
         private Names _name;
         private Dictionary<Worth, int> _weight;
         private int _cardSum;
-        
+        private Display _display;
 
         public Names Name
         {
@@ -37,7 +37,8 @@ namespace BlackJackConsole
         {
             _name = name;          
             _cd = new List<Card>();
-            _weight = new Dictionary<Worth, int>(52);
+            _display = new Display();
+            _weight = new Dictionary<Worth, int>(Variables.WinCombinatin);
             FillWeight();
             _cd.Add(card);
         }
@@ -49,12 +50,8 @@ namespace BlackJackConsole
 
         public void ShowCards()
         {
-            Console.WriteLine("\n"+_name+" cards:");
-            foreach (Card c in _cd)
-            {
-                Console.WriteLine(c.Suite + " " + c.Worth);
-            }
-            Console.WriteLine("Cards sum:"+CardSum);
+            _display.ShowCards(_name, _cd);
+            _display.ShowSum(CardSum);
         }
 
         private void FillWeight()

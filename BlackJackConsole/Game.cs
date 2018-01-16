@@ -6,35 +6,40 @@ namespace BlackJackConsole
     internal class Game
     {
         private Dealer _dl;
+        private Display _display;
 
         public Game()
         {
             _dl = new Dealer();
+            _display = new Display();
         }
 
-        public void ShowScore()
+        public void Play()
         {
-            Console.WriteLine("\nScore:");
-            Console.WriteLine("Player Wins: {0} \nComputer Wins: {1}", _dl.PlayerWins, _dl.ComputerWins);
+            _display.Hello();
+            while (_display.PlayDialog(true) == Variables.Yes)
+            {
+                DistributeCards();
+                _display.ShowScore(_dl.PlayerWins, _dl.ComputerWins);
+                ResetGame();
+            }
+            _display.ShowScore(_dl.PlayerWins, _dl.ComputerWins);
+            _display.DeleyScreen();
         }
- 
-        public void ResetGame()
+
+        private void ResetGame()
         {
             _dl.StartDelivery();
         }
 
-        public void DistributeCards()
+        private void DistributeCards()
         {
-            ConsoleKeyInfo cki;
+            char d;
+            _dl.ShowCards(false);
             while (true)
             {
-                Console.Clear();
-                _dl.ShowCards(false);
-                Console.WriteLine("\nClick 'T' to take a card, or 'P' to pass");
-                cki = Console.ReadKey();
-                Console.Clear();
-
-                if (cki.Key.ToString() == "T")
+                d = _display.PlayDialog(false);
+                if (d == Variables.Take)
                 {
                     if (_dl.AddCard(Names.Player) == 0)
                     {
@@ -42,7 +47,7 @@ namespace BlackJackConsole
                     }
                     else break;
                 }
-                if (cki.Key.ToString() == "P")
+                if (d == Variables.Pass)
                 {
                     if (_dl.AddCard(Names.Computer) == 0)
                     {
@@ -51,7 +56,7 @@ namespace BlackJackConsole
                     }
                     break;
                 }
-                if ((cki.Key.ToString() != "P") && (cki.Key.ToString() != "T"))
+                if ((d != Variables.Pass) && (d != Variables.Take))
                 {
                     _dl.ShowCards(false);
                 }

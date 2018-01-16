@@ -9,6 +9,7 @@ namespace BlackJackConsole
         private Player _player;
         private Player _computer;
         private CardDesk _cd;
+        private Display _display;
         private int _playerWins;
         private int _computerWins;
 
@@ -27,10 +28,11 @@ namespace BlackJackConsole
             }
         }
 
-        public Dealer ()
+        public Dealer()
         {
             _playerWins = 0;
             _computerWins = 0;
+            _display = new Display();
             StartDelivery();
         }
 
@@ -39,17 +41,17 @@ namespace BlackJackConsole
             if (name == Names.Player)
             {
                 _player.TakeCard(_cd.GetCard());
-                if (_player.CardSum == 21)
+                if (_player.CardSum == Variables.WinCombinatin)
                 {
                     _playerWins++;
-                    Console.WriteLine("Player Win!\n");
+                    _display.ShowResult(1);
                     ShowCards(true);
                     return 1;
                 }
-                if (_player.CardSum > 21)
+                if (_player.CardSum > Variables.WinCombinatin)
                 {
                     _computerWins++;
-                    Console.WriteLine("Player Lose!\n");
+                    _display.ShowResult(-1);
                     ShowCards(true);
                     return -1;
                 }
@@ -60,17 +62,17 @@ namespace BlackJackConsole
                 {
                     _computer.TakeCard(_cd.GetCard());
                 }
-                if (_computer.CardSum == 21)
+                if (_computer.CardSum == Variables.WinCombinatin)
                 {
                     _computerWins++;
-                    Console.WriteLine("Player Lose!\n");
+                    _display.ShowResult(-1);
                     ShowCards(true);
                     return -1;
                 }
-                if (_computer.CardSum > 21)
+                if (_computer.CardSum > Variables.WinCombinatin)
                 {
                     _playerWins++;
-                    Console.WriteLine("Player Win!\n");
+                    _display.ShowResult(1);
                     ShowCards(true);
                     return 1;
                 }
@@ -80,9 +82,20 @@ namespace BlackJackConsole
 
         public void CalculateResult()
         {
-            if (_player.CardSum > _computer.CardSum) { Console.WriteLine("Player Win!\n"); _playerWins++; }
-            else if (_player.CardSum < _computer.CardSum) { Console.WriteLine("Player Lose!\n"); _computerWins++; }
-            else { Console.WriteLine("Draw\n"); }
+            if (_player.CardSum > _computer.CardSum)
+            {
+                _display.ShowResult(1);
+                _playerWins++;
+            }
+            if (_player.CardSum < _computer.CardSum)
+            {
+                _display.ShowResult(-1);
+                _computerWins++;
+            }
+            if (_player.CardSum == _computer.CardSum)
+            {
+                _display.ShowResult(0);
+            }
         }
 
         public void StartDelivery()
