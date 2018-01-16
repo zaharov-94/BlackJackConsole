@@ -30,7 +30,7 @@ namespace BlackJackConsole
             {
                 Console.WriteLine(c.Suite + " " + c.Worth);
             }
-        }
+         }
 
         public void ShowSum(int sum)
         {

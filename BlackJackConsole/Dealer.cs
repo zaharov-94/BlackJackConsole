@@ -1,6 +1,4 @@
 ﻿using BlackJackConsole.Enums;
-using System;
-using System.Collections.Generic;
 
 namespace BlackJackConsole
 {
@@ -9,9 +7,9 @@ namespace BlackJackConsole
         private Player _player;
         private Player _computer;
         private CardDesk _cd;
-        private Display _display;
         private int _playerWins;
         private int _computerWins;
+        private Display _display = new Display();
 
         public int PlayerWins
         {
@@ -32,7 +30,6 @@ namespace BlackJackConsole
         {
             _playerWins = 0;
             _computerWins = 0;
-            _display = new Display();
             StartDelivery();
         }
 
@@ -41,20 +38,6 @@ namespace BlackJackConsole
             if (name == Names.Player)
             {
                 _player.TakeCard(_cd.GetCard());
-                if (_player.CardSum == Variables.WinCombinatin)
-                {
-                    _playerWins++;
-                    _display.ShowResult(1);
-                    ShowCards(true);
-                    return 1;
-                }
-                if (_player.CardSum > Variables.WinCombinatin)
-                {
-                    _computerWins++;
-                    _display.ShowResult(-1);
-                    ShowCards(true);
-                    return -1;
-                }
             }
             if (name == Names.Computer)
             {
@@ -62,40 +45,44 @@ namespace BlackJackConsole
                 {
                     _computer.TakeCard(_cd.GetCard());
                 }
-                if (_computer.CardSum == Variables.WinCombinatin)
-                {
-                    _computerWins++;
-                    _display.ShowResult(-1);
-                    ShowCards(true);
-                    return -1;
-                }
-                if (_computer.CardSum > Variables.WinCombinatin)
-                {
-                    _playerWins++;
-                    _display.ShowResult(1);
-                    ShowCards(true);
-                    return 1;
-                }
+                
             }
             return 0;
         }
 
-        public void CalculateResult()
+        public int CalculateResult()
         {
+            if (_player.CardSum == Variables.WinCombinatin)
+            {
+                _playerWins++;
+                return 1;
+            }
+            if (_player.CardSum > Variables.WinCombinatin)
+            {
+                _computerWins++;
+                return -1;
+            }
+            if (_computer.CardSum == Variables.WinCombinatin)
+            {
+                _computerWins++;
+                return -1;
+            }
+            if (_computer.CardSum > Variables.WinCombinatin)
+            {
+                _playerWins++;
+                return 1;
+            }
             if (_player.CardSum > _computer.CardSum)
             {
-                _display.ShowResult(1);
                 _playerWins++;
+                return 1;
             }
             if (_player.CardSum < _computer.CardSum)
             {
-                _display.ShowResult(-1);
                 _computerWins++;
+                return -1;
             }
-            if (_player.CardSum == _computer.CardSum)
-            {
-                _display.ShowResult(0);
-            }
+            return 0;
         }
 
         public void StartDelivery()
@@ -105,10 +92,10 @@ namespace BlackJackConsole
             _computer = new Player(Names.Computer, _cd.GetCard());
         }
 
-        public void ShowCards(bool final)
+        public Player GetPlayer(Names name)
         {
-            _player.ShowCards();
-            if (final) _computer.ShowCards();
+            if (name == Names.Player) return _player;
+            return _computer;
         }
     }
 }

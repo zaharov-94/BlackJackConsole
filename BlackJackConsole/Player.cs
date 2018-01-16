@@ -10,7 +10,6 @@ namespace BlackJackConsole
         private Names _name;
         private Dictionary<Worth, int> _weight;
         private int _cardSum;
-        private Display _display;
 
         public Names Name
         {
@@ -32,12 +31,18 @@ namespace BlackJackConsole
                 return _cardSum;
             }
         }
+        public List<Card> Cards
+        {
+            get
+            {
+                return _cd;
+            }
+        }
 
         public Player(Names name, Card card)
         {
             _name = name;          
             _cd = new List<Card>();
-            _display = new Display();
             _weight = new Dictionary<Worth, int>(Variables.WinCombinatin);
             FillWeight();
             _cd.Add(card);
@@ -46,12 +51,6 @@ namespace BlackJackConsole
         public void TakeCard(Card card)
         {
             _cd.Add(card);
-        }
-
-        public void ShowCards()
-        {
-            _display.ShowCards(_name, _cd);
-            _display.ShowSum(CardSum);
         }
 
         private void FillWeight()

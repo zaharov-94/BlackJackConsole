@@ -32,34 +32,49 @@ namespace BlackJackConsole
             _dl.StartDelivery();
         }
 
+        private void ShowCards(bool finished)
+        {
+            if(finished)
+            {
+                _display.ShowCards(Names.Player, _dl.GetPlayer(Names.Player).Cards);
+                _display.ShowSum(_dl.GetPlayer(Names.Player).CardSum);
+                _display.ShowCards(Names.Computer, _dl.GetPlayer(Names.Computer).Cards);
+                _display.ShowSum(_dl.GetPlayer(Names.Computer).CardSum);
+            }
+            if (!finished)
+            {
+                _display.ShowCards(Names.Player, _dl.GetPlayer(Names.Player).Cards);
+                _display.ShowSum(_dl.GetPlayer(Names.Player).CardSum);
+            }
+
+        }
+
         private void DistributeCards()
         {
             char d;
-            _dl.ShowCards(false);
+            int result;
+            ShowCards(false);
             while (true)
             {
                 d = _display.PlayDialog(false);
                 if (d == Variables.Take)
                 {
-                    if (_dl.AddCard(Names.Player) == 0)
-                    {
-                        _dl.ShowCards(false);
-                    }
-                    else break;
+                    _dl.AddCard(Names.Player);
+                    ShowCards(false);
                 }
                 if (d == Variables.Pass)
                 {
-                    if (_dl.AddCard(Names.Computer) == 0)
-                    {
-                        _dl.CalculateResult();
-                        _dl.ShowCards(true);
-                    }
+                    _dl.AddCard(Names.Computer);
+                    result = _dl.CalculateResult();
+                    _display.ShowResult(result);
+                    ShowCards(true);
                     break;
                 }
                 if ((d != Variables.Pass) && (d != Variables.Take))
                 {
-                    _dl.ShowCards(false);
+                    ShowCards(false);
                 }
+
             }
         }
     }
