@@ -8,19 +8,19 @@ namespace BlackJackConsole.Enums
 {
     public enum Worth
     {
-      two = 0, 
-      three = 1, 
-      four = 2,
-      five = 3,
-      six = 4,
-      seven= 5,
-      eight = 6,
-      nine = 7,
-      ten = 8,
-      Ace = 9,
-      Jack = 10, 
-      Queen = 11,
-      King = 12, 
+      two = 2, 
+      three = 3, 
+      four = 4,
+      five = 5,
+      six = 6,
+      seven= 7,
+      eight = 8,
+      nine = 9,
+      ten = 10,
+      Ace = 11,
+      Jack = 12, 
+      Queen = 13,
+      King = 14, 
 
     }
 }

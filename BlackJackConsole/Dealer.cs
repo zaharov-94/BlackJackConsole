@@ -36,22 +36,16 @@ namespace BlackJackConsole
             int playerCardSum = _player.Cards.Select(x => x.Value).Sum();
             int computerCardSum = _computer.Cards.Select(x => x.Value).Sum();
 
-            if (playerCardSum == Variables.WinCombinatin)
-            {
-                return 1;
-            }
-            if (playerCardSum > Variables.WinCombinatin)
+            if ((playerCardSum > Variables.WinCombinatin) || (computerCardSum == Variables.WinCombinatin))
             {
                 return -1;
             }
-            if (computerCardSum == Variables.WinCombinatin)
-            {
-                return -1;
-            }
-            if (computerCardSum > Variables.WinCombinatin)
+
+            if ((playerCardSum == Variables.WinCombinatin) || (computerCardSum > Variables.WinCombinatin))
             {
                 return 1;
             }
+            
             if (playerCardSum > computerCardSum)
             {
                 return 1;
@@ -66,6 +60,7 @@ namespace BlackJackConsole
         public void StartDelivery(Player player, Player computer)
         {
             _cardDesk = new CardDesk();
+            _cardDesk.ShuffleDesk();
 
             _player = player;
             AddCard(_player.Name);
