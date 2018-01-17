@@ -78,13 +78,13 @@ namespace BlackJackConsole
                 d = _display.PlayDialog(false);
                 if (d == Variables.Take)
                 {
-                    _dealer.AddCard(Names.Player);
+                    _dealer.AddCard(_player);
                     ShowCards(false);
                 }
                 if (d == Variables.Pass)
                 {
-                    _dealer.AddCard(Names.Computer);
-                    result = _dealer.CalculateResult();
+                    _dealer.AddCard(_computer);
+                    result = _dealer.CalculateResult(_player, _computer);
                     ChangeStatistic(result);
                     _display.ShowResult(result);
                     ShowCards(true);

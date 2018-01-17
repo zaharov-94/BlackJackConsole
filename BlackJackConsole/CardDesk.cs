@@ -40,13 +40,13 @@ namespace BlackJackConsole
             {
                 foreach(Worth w in Enum.GetValues(typeof(Worth)))
                 {
-                    if ((int)w < 10)
+                    if ((int)w <= Variables.maxNotFigureCardsValue)
                     {
                         _desk.Push(new Card { Suite = s, Worth = w, Value=(int)w });
                     }
-                    if ((int)w >= 10)
+                    if ((int)w > Variables.maxNotFigureCardsValue)
                     {
-                        _desk.Push(new Card { Suite = s, Worth = w, Value = 10 });
+                        _desk.Push(new Card { Suite = s, Worth = w, Value = Variables.figureCardsValue });
                     }
                 }
             }

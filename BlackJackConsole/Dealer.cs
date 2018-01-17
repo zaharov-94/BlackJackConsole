@@ -5,8 +5,6 @@ namespace BlackJackConsole
 {
     internal class Dealer
     {
-        private Player _player;
-        private Player _computer;
         private CardDesk _cardDesk;
 
         public Dealer(Player player, Player computer)
@@ -14,27 +12,27 @@ namespace BlackJackConsole
             StartDelivery(player, computer);
         }
 
-        public int AddCard(Names name)
+        public int AddCard(Player player)
         {
-            if (name == Names.Player)
+            if (player.Name == Names.Player)
             {
-                _player.TakeCard(_cardDesk.GetCard());
+                player.TakeCard(_cardDesk.GetCard());
             }
-            if (name == Names.Computer)
+            if (player.Name == Names.Computer)
             {
-                while (_computer.Cards.Select(x => x.Value).Sum() < Variables.ComputerStopValue)
+                while (player.Cards.Select(x => x.Value).Sum() < Variables.ComputerStopValue)
                 {
-                    _computer.TakeCard(_cardDesk.GetCard());
+                    player.TakeCard(_cardDesk.GetCard());
                 }
                 
             }
             return 0;
         }
 
-        public int CalculateResult()
+        public int CalculateResult(Player player, Player computer)
         {
-            int playerCardSum = _player.Cards.Select(x => x.Value).Sum();
-            int computerCardSum = _computer.Cards.Select(x => x.Value).Sum();
+            int playerCardSum = player.Cards.Select(x => x.Value).Sum();
+            int computerCardSum = computer.Cards.Select(x => x.Value).Sum();
 
             if ((playerCardSum > Variables.WinCombinatin) || (computerCardSum == Variables.WinCombinatin))
             {
@@ -61,11 +59,8 @@ namespace BlackJackConsole
         {
             _cardDesk = new CardDesk();
             _cardDesk.ShuffleDesk();
-
-            _player = player;
-            AddCard(_player.Name);
-            _computer = computer;
-            AddCard(_computer.Name);
+            AddCard(player);
+            AddCard(computer);
         }
     }
 }
