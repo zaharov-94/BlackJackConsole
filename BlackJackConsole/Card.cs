@@ -9,5 +9,6 @@ namespace BlackJackConsole
     {
         public Suite Suite { get; set; }
         public Worth Worth { get; set; }
+        public int Value { get; set; }
     }
 }

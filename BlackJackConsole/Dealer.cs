@@ -1,4 +1,5 @@
 ﻿using BlackJackConsole.Enums;
+using System.Linq;
 
 namespace BlackJackConsole
 {
@@ -7,30 +8,10 @@ namespace BlackJackConsole
         private Player _player;
         private Player _computer;
         private CardDesk _cardDesk;
-        private int _playerWins;
-        private int _computerWins;
-        private Display _display = new Display();
 
-        public int PlayerWins
+        public Dealer(Player player, Player computer)
         {
-            get
-            {
-                return _playerWins;
-            }
-        }
-        public int ComputerWins
-        {
-            get
-            {
-                return _computerWins;
-            }
-        }
-
-        public Dealer()
-        {
-            _playerWins = 0;
-            _computerWins = 0;
-            StartDelivery();
+            StartDelivery(player, computer);
         }
 
         public int AddCard(Names name)
@@ -41,7 +22,7 @@ namespace BlackJackConsole
             }
             if (name == Names.Computer)
             {
-                while (_computer.CardSum < 17)
+                while (_computer.Cards.Select(x => x.Value).Sum() < Variables.ComputerStopValue)
                 {
                     _computer.TakeCard(_cardDesk.GetCard());
                 }
@@ -52,50 +33,44 @@ namespace BlackJackConsole
 
         public int CalculateResult()
         {
-            if (_player.CardSum == Variables.WinCombinatin)
+            int playerCardSum = _player.Cards.Select(x => x.Value).Sum();
+            int computerCardSum = _computer.Cards.Select(x => x.Value).Sum();
+
+            if (playerCardSum == Variables.WinCombinatin)
             {
-                _playerWins++;
                 return 1;
             }
-            if (_player.CardSum > Variables.WinCombinatin)
+            if (playerCardSum > Variables.WinCombinatin)
             {
-                _computerWins++;
                 return -1;
             }
-            if (_computer.CardSum == Variables.WinCombinatin)
+            if (computerCardSum == Variables.WinCombinatin)
             {
-                _computerWins++;
                 return -1;
             }
-            if (_computer.CardSum > Variables.WinCombinatin)
+            if (computerCardSum > Variables.WinCombinatin)
             {
-                _playerWins++;
                 return 1;
             }
-            if (_player.CardSum > _computer.CardSum)
+            if (playerCardSum > computerCardSum)
             {
-                _playerWins++;
                 return 1;
             }
-            if (_player.CardSum < _computer.CardSum)
+            if (playerCardSum < computerCardSum)
             {
-                _computerWins++;
                 return -1;
             }
             return 0;
         }
 
-        public void StartDelivery()
+        public void StartDelivery(Player player, Player computer)
         {
             _cardDesk = new CardDesk();
-            _player = new Player(Names.Player, _cardDesk.GetCard());
-            _computer = new Player(Names.Computer, _cardDesk.GetCard());
-        }
 
-        public Player GetPlayer(Names name)
-        {
-            if (name == Names.Player) return _player;
-            return _computer;
+            _player = player;
+            AddCard(_player.Name);
+            _computer = computer;
+            AddCard(_computer.Name);
         }
     }
 }

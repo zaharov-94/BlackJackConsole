@@ -8,43 +8,20 @@ namespace BlackJackConsole
     {
         private List<Card> _desk;
         private Random _rand;
-        private bool[] _used;
 
         public CardDesk()
         {
             _desk = new List<Card>(Variables.DeskSize);
             _rand = new Random();
-            _used = new bool[Variables.DeskSize];
-
-            for (int i=0; i< Variables.DeskSize; i++)
-            {
-                _used[i] = false;
-            }
             CreateDesk();
-
         }
 
         public Card GetCard()
         {
-            int number = RandomCardValue();
-            return _desk[number];
-        }
-
-        private int RandomCardValue()
-        {
-            int n = _rand.Next(Variables.DeskSize);
-            while (true)
-            {
-                if (!_used[n])
-                {
-                    _used[n] = true;
-                    return n;
-                }
-                if (_used[n])
-                {
-                    n = _rand.Next(Variables.DeskSize);
-                }
-            }
+            int n = _rand.Next(_desk.Count);
+            Card card = _desk[n];
+            _desk.RemoveAt(n);
+            return card;
         }
 
         private void CreateDesk()
@@ -53,7 +30,14 @@ namespace BlackJackConsole
             {
                 foreach(Worth w in Enum.GetValues(typeof(Worth)))
                 {
-                    _desk.Add(new Card { Suite = s, Worth = w});
+                    if ((int)w < 10)
+                    {
+                        _desk.Add(new Card { Suite = s, Worth = w, Value=(int)w+2 });
+                    }
+                    if ((int)w >= 10)
+                    {
+                        _desk.Add(new Card { Suite = s, Worth = w, Value = 10 });
+                    }
                 }
             }
         }

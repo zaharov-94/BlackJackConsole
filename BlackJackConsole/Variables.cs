@@ -4,6 +4,7 @@
     {
         public static int DeskSize = 52;
         public static int WinCombinatin = 21;
+        public static int ComputerStopValue = 17;
 
         public static char Take = 'T';
         public static char Pass = 'P';
