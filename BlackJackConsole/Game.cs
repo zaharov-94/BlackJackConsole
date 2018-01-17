@@ -29,7 +29,8 @@ namespace BlackJackConsole
             _display.Hello();
             while (_display.PlayDialog(true) == Variables.Yes)
             {
-                DistributeCards();
+                ShowCards(false);
+                PlayRound();
                 _display.ShowScore(_playerWins, _computerWins);
                 ResetGame();
             }
@@ -55,6 +56,13 @@ namespace BlackJackConsole
             }
         }
 
+        private void ShowResult()
+        {
+            int result = _dealer.CalculateResult(_player, _computer);
+            ChangeStatistic(result);
+            _display.ShowResult(result);
+        }
+
         private void ChangeStatistic(int result)
         {
             if (result == 1)
@@ -67,30 +75,25 @@ namespace BlackJackConsole
             }
         }
 
-        private void DistributeCards()
+        private void PlayRound()
         {
-            char d;
-            int result;
+            char playerResponse = Variables.Take;
 
-            ShowCards(false);
-            while (true)
+            while (playerResponse != Variables.Pass)
             {
-                d = _display.PlayDialog(false);
-                if (d == Variables.Take)
+                playerResponse = _display.PlayDialog(false);
+                if (playerResponse == Variables.Take)
                 {
                     _dealer.AddCard(_player);
                     ShowCards(false);
                 }
-                if (d == Variables.Pass)
+                if (playerResponse == Variables.Pass)
                 {
                     _dealer.AddCard(_computer);
-                    result = _dealer.CalculateResult(_player, _computer);
-                    ChangeStatistic(result);
-                    _display.ShowResult(result);
+                    ShowResult();
                     ShowCards(true);
-                    break;
                 }
-                if ((d != Variables.Pass) && (d != Variables.Take))
+                if ((playerResponse != Variables.Pass) && (playerResponse != Variables.Take))
                 {
                     ShowCards(false);
                 }
