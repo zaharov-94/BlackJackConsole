@@ -35,6 +35,5 @@ namespace BlackJackConsole
         {
             _cards.Add(card);
         }
-
     }
 }
