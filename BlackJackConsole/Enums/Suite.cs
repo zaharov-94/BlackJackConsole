@@ -2,9 +2,9 @@
 {
     public enum Suite
     {
-        clubs = 0,
-        diamonds = 1,
-        hearts = 2,
-        spades = 3
+        Clubs = 0,
+        Diamonds = 1,
+        Hearts = 2,
+        Spades = 3
     }
 }

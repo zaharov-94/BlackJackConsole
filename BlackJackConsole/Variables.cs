@@ -2,14 +2,14 @@
 {
     public static class Variables
     {
-        public static int DeskSize = 52;
-        public static int WinCombinatin = 21;
-        public static int ComputerStopValue = 17;
-        public static int figureCardsValue = 10;
-        public static int maxNotFigureCardsValue = 11;
+        public const int DeskSize = 52;
+        public const int WinCombinatin = 21;
+        public const int ComputerStopValue = 17;
+        public const int FigureCardsValue = 10;
+        public const int MaxNotFigureCardsValue = 11;
 
-        public static char Take = 'T';
-        public static char Pass = 'P';
-        public static char Yes = 'Y';
+        public const char Take = 'T';
+        public const char Pass = 'P';
+        public const char Yes = 'Y';
     }
 }

@@ -12,21 +12,22 @@ namespace BlackJackConsole
             StartDelivery(player, computer);
         }
 
-        public int AddCard(Player player)
+        public void AddCard(Player player)
         {
+            int cardSum;
             if (player.Name == Names.Player)
             {
-                player.TakeCard(_cardDesk.GetCard());
+                player.Cards.Add(_cardDesk.GetCard());
             }
             if (player.Name == Names.Computer)
             {
-                while (player.Cards.Select(x => x.Value).Sum() < Variables.ComputerStopValue)
+                cardSum = player.Cards.Select(x => x.Value).Sum();
+                while (cardSum < Variables.ComputerStopValue)
                 {
-                    player.TakeCard(_cardDesk.GetCard());
+                    player.Cards.Add(_cardDesk.GetCard());
+                    cardSum = player.Cards.Select(x => x.Value).Sum();
                 }
-                
             }
-            return 0;
         }
 
         public int CalculateResult(Player player, Player computer)

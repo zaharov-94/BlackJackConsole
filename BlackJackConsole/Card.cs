@@ -3,7 +3,7 @@
 namespace BlackJackConsole
 {
     /// <summary>
-    /// Playing card
+    /// Playing card entity
     /// </summary>
     public class Card
     {

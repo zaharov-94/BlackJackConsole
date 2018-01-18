@@ -14,7 +14,7 @@ namespace BlackJackConsole
         {
             _desk = new Stack<Card>(Variables.DeskSize);
             _rand = new Random();
-            CreateDesk();
+            FillDesk();
         }
 
         public Card GetCard()
@@ -24,29 +24,23 @@ namespace BlackJackConsole
 
         public void ShuffleDesk()
         {
-            List<Card> list = new List<Card>();
-            list = _desk.OrderBy(x => _rand.Next()).ToList();
-            _desk.Clear();
-            foreach (Card c in list)
-            {
-                _desk.Push(c);
-            }
+            _desk = new Stack<Card>(_desk.OrderBy(x => _rand.Next()));
         }
 
-        private void CreateDesk()
+        private void FillDesk()
         {
             
-            foreach (Suite s in Enum.GetValues(typeof(Suite)))
+            foreach (Suite suite in Enum.GetValues(typeof(Suite)))
             {
-                foreach(Worth w in Enum.GetValues(typeof(Worth)))
+                foreach(Worth worth in Enum.GetValues(typeof(Worth)))
                 {
-                    if ((int)w <= Variables.maxNotFigureCardsValue)
+                    if ((int)worth <= Variables.MaxNotFigureCardsValue)
                     {
-                        _desk.Push(new Card { Suite = s, Worth = w, Value=(int)w });
+                        _desk.Push(new Card { Suite = suite, Worth = worth, Value=(int)worth });
                     }
-                    if ((int)w > Variables.maxNotFigureCardsValue)
+                    if ((int)worth > Variables.MaxNotFigureCardsValue)
                     {
-                        _desk.Push(new Card { Suite = s, Worth = w, Value = Variables.figureCardsValue });
+                        _desk.Push(new Card { Suite = suite, Worth = worth, Value = Variables.FigureCardsValue });
                     }
                 }
             }

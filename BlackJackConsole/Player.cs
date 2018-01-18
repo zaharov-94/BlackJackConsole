@@ -1,39 +1,26 @@
 ﻿using BlackJackConsole.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace BlackJackConsole
 {
     internal class Player
     {
-        private List<Card> _cards;
-        private Names _name;
-
         public Names Name
         {
-            get
-            {
-                return _name;
-            }
-        }           
-
+            get;
+        }      
+        
         public List<Card> Cards
         {
-            get
-            {
-                return _cards;
-            }
+            get;
+            set;
         }
 
         public Player(Names name)
         {
-            _name = name;          
-            _cards = new List<Card>();
+            Name = name;
+            Cards = new List<Card>();
         }
 
-        public void TakeCard(Card card)
-        {
-            _cards.Add(card);
-        }
     }
 }

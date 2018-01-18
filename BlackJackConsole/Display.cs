@@ -26,9 +26,9 @@ namespace BlackJackConsole
         public void ShowCards(Names name, List<Card> listCards)
         {
             Console.WriteLine("{0} cards: ", name);
-            foreach (Card c in listCards)
+            foreach (Card card in listCards)
             {
-                Console.WriteLine(c.Suite + " " + c.Worth);
+                Console.WriteLine(card.Suite + " " + card.Worth);
             }
          }
 

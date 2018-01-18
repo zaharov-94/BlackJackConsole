@@ -1,6 +1,5 @@
 ﻿using BlackJackConsole.Enums;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace BlackJackConsole
 {
@@ -24,7 +23,7 @@ namespace BlackJackConsole
             _display = new Display();
         }
 
-        public void Play()
+        public void PlayGame()
         {
             _display.Hello();
             while (_display.PlayDialog(true) == Variables.Yes)
@@ -97,7 +96,6 @@ namespace BlackJackConsole
                 {
                     ShowCards(false);
                 }
-
             }
         }
     }
