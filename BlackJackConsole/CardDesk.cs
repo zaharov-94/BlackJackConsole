@@ -8,12 +8,12 @@ namespace BlackJackConsole
     internal class CardDesk
     {
         private Stack<Card> _desk;
-        private Random _rand;
+        private Random _random;
 
         public CardDesk()
         {
             _desk = new Stack<Card>(Variables.DeskSize);
-            _rand = new Random();
+            _random = new Random();
             FillDesk();
         }
 
@@ -24,7 +24,7 @@ namespace BlackJackConsole
 
         public void ShuffleDesk()
         {
-            _desk = new Stack<Card>(_desk.OrderBy(x => _rand.Next()));
+            _desk = new Stack<Card>(_desk.OrderBy(x => _random.Next()));
         }
 
         private void FillDesk()
