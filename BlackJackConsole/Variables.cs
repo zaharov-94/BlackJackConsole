@@ -5,8 +5,6 @@
         public const int DeskSize = 52;
         public const int WinCombination = 21;
         public const int ComputerStopValue = 17;
-        public const int FigureCardsValue = 10;
-        public const int MaxNotFigureCardsValue = 11;
 
         public const char Take = 'T';
         public const char Pass = 'P';
