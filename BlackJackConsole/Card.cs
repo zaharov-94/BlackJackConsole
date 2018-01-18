@@ -2,9 +2,6 @@
 
 namespace BlackJackConsole
 {
-    /// <summary>
-    /// Playing card entity
-    /// </summary>
     public class Card
     {
         public Suite Suite { get; set; }
