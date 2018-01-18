@@ -14,19 +14,13 @@ namespace BlackJackConsole
 
         public void AddCard(Player player)
         {
-            int cardSum;
             if (player.Name == Names.Player)
             {
                 player.Cards.Add(_cardDesk.GetCard());
             }
             if (player.Name == Names.Computer)
             {
-                cardSum = player.Cards.Select(x => x.Value).Sum();
-                while (cardSum < Variables.ComputerStopValue)
-                {
-                    player.Cards.Add(_cardDesk.GetCard());
-                    cardSum = player.Cards.Select(x => x.Value).Sum();
-                }
+                TakeComputerCards(player);
             }
         }
 
@@ -62,6 +56,16 @@ namespace BlackJackConsole
             _cardDesk.ShuffleDesk();
             AddCard(player);
             AddCard(computer);
+        }
+
+        private void TakeComputerCards(Player player)
+        {
+            int cardSum = player.Cards.Select(x => x.Value).Sum();
+            while (cardSum < Variables.ComputerStopValue)
+            {
+                player.Cards.Add(_cardDesk.GetCard());
+                cardSum = player.Cards.Select(x => x.Value).Sum();
+            }
         }
     }
 }
