@@ -84,19 +84,16 @@ namespace BlackJackConsole
                 if (playerResponse == Variables.Take)
                 {
                     _dealer.AddCard(_player);
-                    ShowCards(false);
                 }
                 if (playerResponse == Variables.Pass)
                 {
                     _dealer.AddCard(_computer);
                     ShowResult();
-                    ShowCards(true);
+                    break;
                 }
-                if ((playerResponse != Variables.Pass) && (playerResponse != Variables.Take))
-                {
-                    ShowCards(false);
-                }
+                ShowCards(false);
             }
+            ShowCards(true);
         }
     }
 }
