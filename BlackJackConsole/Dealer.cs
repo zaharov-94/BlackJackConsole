@@ -9,7 +9,7 @@ namespace BlackJackConsole
 
         public Dealer(Player player, Player computer)
         {
-            StartDelivery(player, computer);
+            DistributeCards(player, computer);
         }
 
         public void AddCard(Player player)
@@ -24,38 +24,43 @@ namespace BlackJackConsole
             }
         }
 
-        public int CalculateResult(Player player, Player computer)
+        public Results CalculateResult(Player player, Player computer, bool gameFinished)
         {
             int playerCardSum = player.Cards.Select(x => x.Value).Sum();
             int computerCardSum = computer.Cards.Select(x => x.Value).Sum();
 
-            if ((playerCardSum > Variables.WinCombinatin) || (computerCardSum == Variables.WinCombinatin))
+            if ((playerCardSum > Variables.WinCombination) || (computerCardSum == Variables.WinCombination))
             {
-                return -1;
+                return Results.Lose;
             }
 
-            if ((playerCardSum == Variables.WinCombinatin) || (computerCardSum > Variables.WinCombinatin))
+            if ((playerCardSum == Variables.WinCombination) || (computerCardSum > Variables.WinCombination))
             {
-                return 1;
+                return Results.Win;
             }
             
-            if (playerCardSum > computerCardSum)
+            if (gameFinished && (playerCardSum > computerCardSum))
             {
-                return 1;
+                return Results.Win;
             }
-            if (playerCardSum < computerCardSum)
+            if (gameFinished && (playerCardSum < computerCardSum))
             {
-                return -1;
+                return Results.Lose;
             }
-            return 0;
+            if (gameFinished && (playerCardSum == computerCardSum))
+            {
+                return Results.Draw;
+            }
+
+            return Results.NoResult;
         }
 
-        public void StartDelivery(Player player, Player computer)
+        public void DistributeCards(Player player, Player computer)
         {
             _cardDesk = new CardDesk();
             _cardDesk.ShuffleDesk();
-            AddCard(player);
-            AddCard(computer);
+            player.Cards.Add(_cardDesk.GetCard());
+            computer.Cards.Add(_cardDesk.GetCard());
         }
 
         private void TakeComputerCards(Player player)

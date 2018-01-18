@@ -27,23 +27,24 @@ namespace BlackJackConsole
             _desk = new Stack<Card>(_desk.OrderBy(x => _random.Next()));
         }
 
-        private void FillDesk()
+        private void FillDesk() //Убрать цикл в цикле!
         {
-            
             foreach (Suite suite in Enum.GetValues(typeof(Suite)))
             {
-                foreach(Worth worth in Enum.GetValues(typeof(Worth)))
-                {
-                    if ((int)worth <= Variables.MaxNotFigureCardsValue)
-                    {
-                        _desk.Push(new Card { Suite = suite, Worth = worth, Value=(int)worth });
-                    }
-                    if ((int)worth > Variables.MaxNotFigureCardsValue)
-                    {
-                        _desk.Push(new Card { Suite = suite, Worth = worth, Value = Variables.FigureCardsValue });
-                    }
-                }
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Two, Value = 2 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Three, Value = 3 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Four, Value = 4 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Five, Value = 5 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Six, Value = 6 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Seven, Value = 7 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Eight, Value = 8 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Nine, Value = 9 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Ten, Value = 10 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Jack, Value = 10 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Queen, Value = 10 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.King, Value = 10 });
+                _desk.Push(new Card { Suite = suite, Worth = Worth.Ace, Value = 11 });
             }
         }
-   }
+    }
 }

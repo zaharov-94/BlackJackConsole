@@ -7,17 +7,19 @@ namespace BlackJackConsole
     public class Display
     {
         
-        public void ShowResult(int winner)
+        public void ShowResult(Results result)
         {
-            if (winner == 1)
+            if (result == Results.Win)
             {
-                Console.WriteLine("Player Win!\n");
+                Console.WriteLine("Player Won!\n");
+                return;
             }
-            if (winner == -1)
+            if (result == Results.Lose)
             {
                 Console.WriteLine("Player Lose!\n");
+                return;
             }
-            if (winner == 0)
+            if (result == Results.Draw)
             {
                 Console.WriteLine("Draw!\n");
             }
@@ -43,7 +45,7 @@ namespace BlackJackConsole
             Console.WriteLine("Player Wins: {0} \nComputer Wins: {1}\n", playerWins, computerWins);
         }
 
-        public void Hello()
+        public void ShowHelloMessage()
         {
             Console.WriteLine("Hi, Player!");
             Console.WriteLine("Click on some button to continue...");
@@ -51,20 +53,20 @@ namespace BlackJackConsole
             Console.Clear();
         }
 
-        public char PlayDialog(bool startDialog)
+        public char PlayDialog(bool isStartDialog)//Переименовать
         {
-            ConsoleKeyInfo cki;
-            if (startDialog)
+            ConsoleKeyInfo consoleKeyInfo;
+            if (isStartDialog)
             {
                 Console.WriteLine("Do you want start play? (Y/N)\n");
             }
-            if (!startDialog)
+            if (!isStartDialog)
             {
                 Console.WriteLine("Click 'T' to take a card, or 'P' to pass\n");
             }
-            cki = Console.ReadKey();
+            consoleKeyInfo = Console.ReadKey();
             Console.Clear();
-            return char.Parse(cki.Key.ToString());
+            return char.Parse(consoleKeyInfo.Key.ToString());
         }
 
         public void DelayScreen()

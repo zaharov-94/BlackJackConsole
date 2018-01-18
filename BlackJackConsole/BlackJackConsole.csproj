@@ -46,6 +46,7 @@
     <Compile Include="CardDesk.cs" />
     <Compile Include="Dealer.cs" />
     <Compile Include="Enums\Names.cs" />
+    <Compile Include="Enums\Results.cs" />
     <Compile Include="Enums\Suite.cs" />
     <Compile Include="Enums\Worth.cs" />
     <Compile Include="Game.cs" />

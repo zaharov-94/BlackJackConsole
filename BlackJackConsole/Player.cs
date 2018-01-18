@@ -5,16 +5,9 @@ namespace BlackJackConsole
 {
     internal class Player
     {
-        public Names Name
-        {
-            get;
-        }      
+        public Names Name { get; }      
         
-        public List<Card> Cards
-        {
-            get;
-            set;
-        }
+        public List<Card> Cards { get; set; }
 
         public Player(Names name)
         {

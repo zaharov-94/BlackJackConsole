@@ -25,10 +25,9 @@ namespace BlackJackConsole
 
         public void PlayGame()
         {
-            _display.Hello();
+            _display.ShowHelloMessage();
             while (_display.PlayDialog(true) == Variables.Yes)
             {
-                ShowCards(false);
                 PlayRound();
                 _display.ShowScore(_playerWins, _computerWins);
                 ResetGame();
@@ -41,34 +40,27 @@ namespace BlackJackConsole
         {
             _player.Cards.Clear();
             _computer.Cards.Clear();
-            _dealer.StartDelivery(_player, _computer);
+            _dealer.DistributeCards(_player, _computer);
         }
 
-        private void ShowCards(bool finished)
+        private void ShowCards(bool showComputerCards) //Переименовать
         {
             _display.ShowCards(Names.Player, _player.Cards);
             _display.ShowSum(_player.Cards.Select(x => x.Value).Sum());
-            if (finished)
+            if (showComputerCards)
             {
                 _display.ShowCards(Names.Computer, _computer.Cards);
                 _display.ShowSum(_computer.Cards.Select(x => x.Value).Sum());
             }
         }
 
-        private void ShowResult()
+        private void ChangeStatistic(Results result)
         {
-            int result = _dealer.CalculateResult(_player, _computer);
-            ChangeStatistic(result);
-            _display.ShowResult(result);
-        }
-
-        private void ChangeStatistic(int result)
-        {
-            if (result == 1)
+            if (result == Results.Win)
             {
                 _playerWins++;
             }
-            if (result == -1)
+            if (result == Results.Lose)
             {
                 _computerWins++;
             }
@@ -77,22 +69,26 @@ namespace BlackJackConsole
         private void PlayRound()
         {
             char playerResponse = Variables.Take;
+            Results result = Results.NoResult;
 
-            while (playerResponse != Variables.Pass)
+            while (result == Results.NoResult)
             {
+                ShowCards(false);
                 playerResponse = _display.PlayDialog(false);
                 if (playerResponse == Variables.Take)
                 {
                     _dealer.AddCard(_player);
+                    result = _dealer.CalculateResult(_player, _computer, false);
                 }
                 if (playerResponse == Variables.Pass)
                 {
                     _dealer.AddCard(_computer);
-                    ShowResult();
-                    break;
+                    result = _dealer.CalculateResult(_player, _computer, true);
                 }
-                ShowCards(false);
             }
+
+            ChangeStatistic(result);
+            _display.ShowResult(result);
             ShowCards(true);
         }
     }
