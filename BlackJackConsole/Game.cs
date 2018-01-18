@@ -34,7 +34,7 @@ namespace BlackJackConsole
                 ResetGame();
             }
             _display.ShowScore(_playerWins, _computerWins);
-            _display.DeleyScreen();
+            _display.DelayScreen();
         }
 
         private void ResetGame()

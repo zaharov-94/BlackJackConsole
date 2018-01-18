@@ -67,7 +67,7 @@ namespace BlackJackConsole
             return char.Parse(cki.Key.ToString());
         }
 
-        public void DeleyScreen()
+        public void DelayScreen()
         {
             Console.ReadLine();
         }
