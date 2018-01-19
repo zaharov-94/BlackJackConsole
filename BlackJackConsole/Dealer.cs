@@ -24,7 +24,7 @@ namespace BlackJackConsole
             }
         }
 
-        public Results CalculateResult(Player player, Player computer, bool roundFinished)
+        public Results CalculateResult(Player player, Player computer, bool isPlayerPassed)
         {
             int playerCardSum = player.Cards.Select(x => x.Value).Sum();
             int computerCardSum = computer.Cards.Select(x => x.Value).Sum();
@@ -39,15 +39,15 @@ namespace BlackJackConsole
                 return Results.Win;
             }
             
-            if (roundFinished && (playerCardSum > computerCardSum))
+            if (isPlayerPassed && (playerCardSum > computerCardSum))
             {
                 return Results.Win;
             }
-            if (roundFinished && (playerCardSum < computerCardSum))
+            if (isPlayerPassed && (playerCardSum < computerCardSum))
             {
                 return Results.Lose;
             }
-            if (roundFinished && (playerCardSum == computerCardSum))
+            if (isPlayerPassed && (playerCardSum == computerCardSum))
             {
                 return Results.Draw;
             }

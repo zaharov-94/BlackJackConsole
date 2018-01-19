@@ -53,7 +53,7 @@ namespace BlackJackConsole
             Console.Clear();
         }
 
-        public char PlayDialog(bool isStartDialog)//Переименовать
+        public char PlayDialog(bool isStartDialog)
         {
             ConsoleKeyInfo consoleKeyInfo;
             if (isStartDialog)

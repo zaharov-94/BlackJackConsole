@@ -43,7 +43,7 @@ namespace BlackJackConsole
             _dealer.DistributeCards(_player, _computer);
         }
 
-        private void ShowCards(bool showComputerCards) //Переименовать
+        private void ShowCards(bool showComputerCards)
         {
             _display.ShowCards(Names.Player, _player.Cards);
             _display.ShowSum(_player.Cards.Select(x => x.Value).Sum());
