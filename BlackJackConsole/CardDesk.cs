@@ -32,7 +32,7 @@ namespace BlackJackConsole
             Worth worth = Worth.Two;
             Suite suite = Suite.Clubs;
 
-            while ((worth <= Worth.Ace))
+            while (worth <= Worth.Ace)
             {
                 _desk.Push(new Card { Suite = suite, Worth = worth, Value = CurrentWorthValue(worth) });
                 suite++;
