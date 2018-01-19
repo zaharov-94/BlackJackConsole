@@ -46,11 +46,11 @@ namespace BlackJackConsole
         private void ShowCards(bool showComputerCards)
         {
             _display.ShowCards(Names.Player, _player.Cards);
-            _display.ShowSum(_player.Cards.Select(x => x.Value).Sum());
+            _display.ShowSum(_player.Cards.Sum(x => x.Value));
             if (showComputerCards)
             {
                 _display.ShowCards(Names.Computer, _computer.Cards);
-                _display.ShowSum(_computer.Cards.Select(x => x.Value).Sum());
+                _display.ShowSum(_computer.Cards.Sum(x => x.Value));
             }
         }
 

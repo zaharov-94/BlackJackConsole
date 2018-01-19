@@ -26,8 +26,8 @@ namespace BlackJackConsole
 
         public Results CalculateResult(Player player, Player computer, bool isPlayerPassed)
         {
-            int playerCardSum = player.Cards.Select(x => x.Value).Sum();
-            int computerCardSum = computer.Cards.Select(x => x.Value).Sum();
+            int playerCardSum = player.Cards.Sum(x => x.Value);
+            int computerCardSum = computer.Cards.Sum(x => x.Value);
 
             if ((playerCardSum > Variables.WinCombination) || (computerCardSum == Variables.WinCombination))
             {
@@ -65,11 +65,11 @@ namespace BlackJackConsole
 
         private void TakeComputerCards(Player player)
         {
-            int cardSum = player.Cards.Select(x => x.Value).Sum();
+            int cardSum = player.Cards.Sum(x => x.Value);
             while (cardSum < Variables.ComputerStopValue)
             {
                 player.Cards.Add(_cardDesk.GetCard());
-                cardSum = player.Cards.Select(x => x.Value).Sum();
+                cardSum = player.Cards.Sum(x => x.Value);
             }
         }
     }
