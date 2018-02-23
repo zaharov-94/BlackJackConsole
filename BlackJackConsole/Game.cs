@@ -11,7 +11,7 @@ namespace BlackJackConsole
         private Player _computer;
 
         private int _playerWins;
-        private int _computerWins;
+        private int _computerWins; 
 
         public Game()
         {
